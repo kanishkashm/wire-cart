@@ -1,0 +1,36 @@
+﻿@page
+@model WireCart.Pages.CategoryAddModel
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Add Cateory</h4>
+            <form asp-page-handler="CategoryAdd" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label asp-for="Category.Name" for="name">Name</label>
+                    <input asp-for="Category.Name" type="text" class="form-control" id="name" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                        Category name is required.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Category.Description" for="description">Description</label>
+                    <input asp-for="Category.Description" type="text" class="form-control" id="description" placeholder="" value="" required>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="FileUpload">Select image <span class="text-muted">(Optional)</span></label>
+                    <input type="file" asp-for=" FileUpload">
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Add Category</button>
+            </form>
+        </div>
+    </div>
+</div>

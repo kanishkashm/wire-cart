@@ -1,0 +1,46 @@
+﻿@using WireCart.Entities;
+@model IEnumerable<SubCategory>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Sub Category Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Active</th>
+                            <th> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var subCatItem in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @if (string.IsNullOrEmpty(subCatItem.ImageName))
+                                    {
+                                        <img src="https://dummyimage.com/50x50/55595c/fff" />
+                                    }
+                                    else
+                                    {
+                                        <img class="img_in_table" src="~/images/sub_category/@subCatItem.ImageName" />
+                                    }
+                                </td>
+                                <td>@subCatItem.Name</td>
+                                <td>@subCatItem.Description</td>
+                                <td>@subCatItem.IsActive</td>
+                                <td>
+                                    <a asp-page="SubCategoryEdit" asp-route-subCatId="@subCatItem.Id" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

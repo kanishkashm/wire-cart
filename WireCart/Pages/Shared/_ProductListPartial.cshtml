@@ -1,0 +1,45 @@
+﻿@using WireCart.Entities;
+@model IEnumerable<Product>
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Active</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td><img class="img_in_table" src="~/images/product/@product.ImageFile" /></td>
+                                <td>@product.Name</td>
+                                <td>@product.Description</td>
+                                <td>@product.Price</td>
+                                <td>@product.IsActive</td>
+                                @*<td class="text-right">
+
+                            <form asp-page-handler="removetocart" method="post">
+                            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                            <input type="hidden" asp-for="@Model.Cart.Id" name="cartId" />
+                            <input type="hidden" asp-for="@cartItem.Id" name="cartItemId" />
+                            </form>
+
+                            </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@page
+@model WireCart.Pages.AdminModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-3">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>List</div>
+                <ul class="list-group category_block">
+                    <li class="list-group-item"><a asp-page="Admin" asp-route-resourceId="1">Category</a></li>
+                    <li class="list-group-item"><a asp-page="Admin" asp-route-resourceId="2">Subcategory</a></li>
+                    <li class="list-group-item"><a asp-page="Admin" asp-route-resourceId="3">Products</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                @if(Model.SelectedResource == 1)
+                {
+                    <partial name="_CategoryListPartial" model="@Model.CategoryList" />
+                }
+                else if (Model.SelectedResource == 2)
+                {
+                    <partial name="_SubCategoryListPartial" model="@Model.SubCategoryList" />
+                }
+                else if (Model.SelectedResource == 3)
+                {
+                    <partial name="_ProductListPartial" model="@Model.ProductList" />
+                }
+
+                <div class="col-12">
+                    <paging total-records="Model.PageInfo.Total"
+                            page-no="Model.PageInfo.CurrentPage"
+                            page-size="5"
+                            query-string-value="@(Request.QueryString.Value)">
+                    </paging>
+                </div>                
+
+                @if (Model.SelectedResource == 1)
+                {
+                    <div class="col mb-2">
+                        <div class="row">
+                            <div class="col-sm-6  col-md-6">
+                                <a asp-page="CategoryAdd" class="btn btn-lg btn-block btn-success">Add New Category</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (Model.SelectedResource == 2)
+                {
+                    <div class="col mb-2">
+                        <div class="row">
+                            <div class="col-sm-6  col-md-6">
+                                <a asp-page="SubCategoryAdd" class="btn btn-lg btn-block btn-success">Add New Sub Category</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (Model.SelectedResource == 3)
+                {
+                    <div class="col mb-2">
+                        <div class="row">
+                            <div class="col-sm-6  col-md-6">
+                                <a asp-page="ProductAdd" class="btn btn-lg btn-block btn-success">Add New Product</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

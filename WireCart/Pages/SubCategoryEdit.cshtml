@@ -1,0 +1,49 @@
+﻿@page
+@model SubCategoryEditModel
+@{
+    ViewData["Title"] = "Edit Sub Category";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Add Sub Cateory</h4>
+            <form asp-page-handler="SubCategoryEdit" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <input type="hidden" asp-for="SubCategory.Id" />
+                <input type="hidden" asp-for="SubCategory.ImageName" />
+                <div class="mb-3">
+                    <label asp-for="SubCategory.CategoryId" for="name">Category</label>
+                    <select asp-for="SubCategory.CategoryId" asp-items="Model.Options" required></select>
+                    <div class="invalid-feedback">
+                        Category name is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SubCategory.Name" for="name">Name</label>
+                    <input asp-for="SubCategory.Name" type="text" class="form-control" id="name" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Sub Category name is required.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="SubCategory.Description" for="description">Description</label>
+                    <input asp-for="SubCategory.Description" type="text" class="form-control" id="description" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="SubCategory.IsActive" for="description">Active</label>
+                    <input asp-for="SubCategory.IsActive" type="checkbox" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="FileUpload">Select image <span class="text-muted">(Optional)</span></label>
+                    <input type="file" asp-for=" FileUpload">
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Edit Sub Category</button>
+            </form>
+        </div>
+    </div>
+</div>

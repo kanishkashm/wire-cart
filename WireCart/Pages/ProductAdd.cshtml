@@ -1,0 +1,89 @@
+﻿@page
+@using Microsoft.AspNetCore.Html;
+@using Newtonsoft.Json;
+@model WireCart.Pages.ProductAddModel
+@{
+    var dataJson = new HtmlString(JsonConvert.SerializeObject(Model.Categories, Formatting.Indented,
+    new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            }));
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Add Product</h4>
+            <form asp-page-handler="ProductAdd" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label asp-for="CategoryId" for="name">Category</label>
+                    <select asp-for="CategoryId" asp-items="Model.CategoryOptions" id="slcCategory" class="form-control" required></select>
+                    <div class="invalid-feedback">
+                        Category is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.SubCategoryId" for="name">Sub Category</label>
+                    <select asp-for="Product.SubCategoryId" asp-items="Model.SubCategoryOptions" id="slcSubCategory" class="form-control" required></select>
+                    <div class="invalid-feedback">
+                        Sub Category is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Name" for="name">Name</label>
+                    <input asp-for="Product.Name" type="text" class="form-control" id="name" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Product name is required.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Product.Description" for="description">Description</label>
+                    <input asp-for="Product.Description" type="text" class="form-control" id="description" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Price" for="description">Price</label>
+                    <input asp-for="Product.Price" type="number" class="form-control" id="Price" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Price is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.IsActive" for="description">Active</label>
+                    <input asp-for="Product.IsActive" type="checkbox" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="FileUpload">Select image <span class="text-muted">(Optional)</span></label>
+                    <input type="file" asp-for="FileUpload">
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Add Product</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#slcCategory").change(function () {
+            var categories = @Html.Raw(dataJson);
+            var thisCategory = categories.filter(x => x.Id === +$(this).val());
+            console.log("thisCategory: ", thisCategory);
+            console.log("Sub Categories: ", thisCategory[0].SubCategories);
+            var subCategories = thisCategory[0].SubCategories;
+            var subCatSelect = $('#slcSubCategory');
+            $(subCatSelect).empty();
+            //$(subCatSelect).append($(`<option selected>Choose sub category</option>`));
+            subCategories.map(sb => {
+                console.log("sb: ", sb);
+                $(subCatSelect).append($(`<option value="${sb.Id}">${sb.Name}</option>`));
+            });
+        });
+    });
+</script>

@@ -1,0 +1,45 @@
+﻿@page
+@model WireCart.Pages.CategoryEditModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Edit Category</h4>
+            <form asp-page-handler="CategoryEdit" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <input type="hidden" asp-for="Category.Id" />
+                <input type="hidden" asp-for="Category.ImageName" />
+                <div class="mb-3">
+                    <label asp-for="Category.Name">Name</label>
+                    <input asp-for="Category.Name" class="form-control">
+                    <div class="invalid-feedback">
+                        Category name is required.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Category.Description" for="description">Description</label>
+                    <input asp-for="Category.Description" type="text" class="form-control" id="description" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Description is required.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Category.IsActive" for="description">Active</label>
+                    <input asp-for="Category.IsActive" type="checkbox" class="form-control">
+                </div>
+                @*<div class="custom-control custom-checkbox">
+                    <input asp-for="Category.IsActive" type="checkbox" class="custom-control-input">
+                    <label class="custom-control-label">Active</label>
+                </div>*@
+                <div class="mb-3">
+                    <label for="FileUpload">Select image <span class="text-muted">(Optional)</span></label>
+                    <input asp-for="FileUpload" type="file">
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Edit Category</button>
+            </form>
+        </div>
+    </div>
+</div>

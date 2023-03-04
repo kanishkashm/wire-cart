@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WireCart.Entities;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@if (SignInManager.IsSignedIn(User))
+{
+    <a class="btn btn-primary btn-sm ml-3" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+        <button class="btn btn-primary btn-sm ml-3" type="submit">Logout</button>
+    </form>
+}
+else
+{
+
+    <a class="btn btn-primary btn-sm ml-3" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    <a class="btn btn-primary btn-sm ml-3" asp-area="Identity" asp-page="/Account/Login">Login</a>
+}
